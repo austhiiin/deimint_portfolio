@@ -5,27 +5,27 @@ const artworkCategories = [
     id: 1,
     name: "Digital Illustration",
     description: "Fantasy art, character design, and digital paintings",
-    image: "https://images.unsplash.com/photo-1596548438137-d51ea5c83ca5?w=800&h=1000&fit=crop",
+    image: "", // Leave blank - will be connected to database
     artworks: [
       { 
         id: 1, 
         title: "Ethereal Portrait", 
-        image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&h=1000&fit=crop" 
+        image: "" // Leave blank - will be connected to database
       },
       { 
         id: 3, 
         title: "Fantasy Illustration", 
-        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=1000&fit=crop" 
+        image: "" 
       },
       { 
         id: 6, 
         title: "Concept Art", 
-        image: "https://images.unsplash.com/photo-1561998338-13ad7883b20f?w=800&h=1000&fit=crop" 
+        image: "" 
       },
       { 
         id: 7, 
         title: "Character Design", 
-        image: "https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?w=800&h=1000&fit=crop" 
+        image: "" 
       },
     ],
   },
@@ -33,22 +33,22 @@ const artworkCategories = [
     id: 2,
     name: "Traditional Art",
     description: "Charcoal, ink, and mixed media works",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=1000&fit=crop",
+    image: "",
     artworks: [
       { 
         id: 2, 
         title: "Charcoal Study", 
-        image: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=800&h=1000&fit=crop" 
+        image: "" 
       },
       { 
         id: 4, 
         title: "Ink Sketch", 
-        image: "https://images.unsplash.com/photo-1578926078164-61dd51d7f665?w=800&h=1000&fit=crop" 
+        image: "" 
       },
       { 
         id: 8, 
         title: "Watercolor Painting", 
-        image: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=800&h=1000&fit=crop" 
+        image: "" 
       },
     ],
   },
@@ -56,22 +56,22 @@ const artworkCategories = [
     id: 3,
     name: "Commissions",
     description: "Custom artwork for clients and collaborators",
-    image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&h=1000&fit=crop",
+    image: "",
     artworks: [
       { 
         id: 5, 
         title: "Commission Piece", 
-        image: "https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?w=800&h=1000&fit=crop" 
+        image: "" 
       },
       { 
         id: 9, 
         title: "Client Portrait", 
-        image: "https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&h=1000&fit=crop" 
+        image: "" 
       },
       { 
         id: 10, 
         title: "Custom Illustration", 
-        image: "https://images.unsplash.com/photo-1582201957340-3bc4277f4a4a?w=800&h=1000&fit=crop" 
+        image: "" 
       },
     ],
   },
@@ -105,14 +105,14 @@ const Work: React.FC = () => {
 
   return (
     <>
-      <section id="gallery" className="py-24 bg-white">
+      <section id="gallery" className="py-24 bg-gradient-to-b from-white to-[#F0FFF1]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-light text-neutral-900">
-              Selected <span className="font-semibold italic">Works</span>
+            <h2 className="text-4xl font-light text-[#5603AD] font-poppins">
+              Selected <span className="font-semibold italic bg-gradient-to-r from-[#8367C7] to-[#5603AD] bg-clip-text text-transparent">Works</span>
             </h2>
-            <p className="mt-4 text-neutral-600 max-w-2xl mx-auto">
+            <p className="mt-4 text-neutral-700 max-w-2xl mx-auto font-dmsans">
               Explore my creative journey through different mediums and styles
             </p>
           </div>
@@ -123,23 +123,35 @@ const Work: React.FC = () => {
               <button
                 key={category.id}
                 onClick={() => openCategoryModal(category)}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 text-left"
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-[#8367C7]/20 transition-all duration-300 text-left ring-2 ring-[#B3E9C7] hover:ring-[#8367C7]"
               >
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                {/* Placeholder for image from database */}
+                <div className="w-full h-[400px] bg-gradient-to-br from-[#C2F8CB] to-[#B3E9C7] flex items-center justify-center">
+                  {category.image ? (
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className="text-center text-[#8367C7] font-poppins">
+                      <svg className="w-16 h-16 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span className="text-sm font-medium">Image from database</span>
+                    </div>
+                  )}
+                </div>
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                  <h3 className="text-white text-2xl font-medium mb-2">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#5603AD]/90 via-[#8367C7]/50 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-white text-2xl font-medium mb-2 font-poppins">
                     {category.name}
                   </h3>
-                  <p className="text-neutral-200 text-sm mb-3">
+                  <p className="text-[#C2F8CB] text-sm mb-3 font-inter">
                     {category.description}
                   </p>
-                  <span className="text-white/90 text-sm font-medium inline-flex items-center">
+                  <span className="text-white/90 text-sm font-medium inline-flex items-center font-dmsans">
                     View {category.artworks.length} piece{category.artworks.length !== 1 ? 's' : ''}
                     <svg
                       className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
@@ -165,26 +177,26 @@ const Work: React.FC = () => {
       {/* Category Modal */}
       {selectedCategory && (
         <div
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 bg-[#ffffff]/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
           onClick={closeCategoryModal}
         >
           <div
-            className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-neutral-200 p-6 flex items-center justify-between rounded-t-3xl">
+            <div className="sticky top-0 bg-white border-b border-[#C2F8CB] p-6 flex items-center justify-between rounded-t-3xl">
               <div>
-                <h3 className="text-2xl font-semibold text-neutral-900">
+                <h3 className="text-2xl font-semibold text-[#5603AD] font-poppins">
                   {selectedCategory.name}
                 </h3>
-                <p className="text-neutral-600 text-sm mt-1">
+                <p className="text-neutral-600 text-sm mt-1 font-inter">
                   {selectedCategory.description}
                 </p>
               </div>
               <button
                 onClick={closeCategoryModal}
-                className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                className="text-[#8367C7] hover:text-[#5603AD] transition-colors p-2 hover:bg-[#F0FFF1] rounded-full"
               >
                 <svg
                   className="w-6 h-6"
@@ -208,15 +220,27 @@ const Work: React.FC = () => {
                 <button
                   key={artwork.id}
                   onClick={() => openArtworkModal(artwork)}
-                  className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+                  className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl hover:shadow-[#8367C7]/20 transition-all duration-300 ring-2 ring-[#B3E9C7] hover:ring-[#8367C7]"
                 >
-                  <img
-                    src={artwork.image}
-                    alt={artwork.title}
-                    className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white text-lg font-medium">
+                  {/* Placeholder for image from database */}
+                  <div className="w-full h-[300px] bg-gradient-to-br from-[#C2F8CB] to-[#B3E9C7] flex items-center justify-center">
+                    {artwork.image ? (
+                      <img
+                        src={artwork.image}
+                        alt={artwork.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="text-center text-[#8367C7] font-poppins">
+                        <svg className="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span className="text-xs font-medium">Database Image</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#5603AD]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-white text-lg font-medium font-poppins">
                       {artwork.title}
                     </span>
                   </div>
@@ -230,7 +254,7 @@ const Work: React.FC = () => {
       {/* Artwork Detail Modal */}
       {selectedArtwork && (
         <div
-          className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4"
+          className="fixed inset-0 bg-[#5603AD]/95 z-[60] flex items-center justify-center p-4 backdrop-blur-md"
           onClick={closeArtworkModal}
         >
           <div
@@ -239,7 +263,7 @@ const Work: React.FC = () => {
           >
             <button
               onClick={closeArtworkModal}
-              className="absolute -top-12 right-0 text-white hover:text-neutral-300 transition-colors"
+              className="absolute -top-12 right-0 text-white hover:text-[#C2F8CB] transition-colors"
             >
               <svg
                 className="w-8 h-8"
@@ -255,12 +279,26 @@ const Work: React.FC = () => {
                 />
               </svg>
             </button>
-            <img
-              src={selectedArtwork.image}
-              alt={selectedArtwork.title}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
-            />
-            <p className="text-white text-center mt-4 text-lg">
+            
+            {/* Placeholder for image from database */}
+            {selectedArtwork.image ? (
+              <img
+                src={selectedArtwork.image}
+                alt={selectedArtwork.title}
+                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl ring-2 ring-[#B3E9C7]"
+              />
+            ) : (
+              <div className="bg-gradient-to-br from-[#C2F8CB] to-[#B3E9C7] rounded-lg shadow-2xl ring-2 ring-[#B3E9C7] w-full h-[70vh] flex items-center justify-center">
+                <div className="text-center text-[#8367C7]">
+                  <svg className="w-24 h-24 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span className="text-lg font-medium font-poppins">Image from database</span>
+                </div>
+              </div>
+            )}
+            
+            <p className="text-white text-center mt-4 text-lg font-poppins">
               {selectedArtwork.title}
             </p>
           </div>
